@@ -7,12 +7,12 @@ import Win from "./Win";
 
 export default class Main extends React.Component {
     state = {
+        isHidden:undefined,
         question: "",
         title: "",
         answer: "",
         score: 1,
         yourScore: 0,
-        highestScore: null,
         points: NaN,
         time: 0,
         rounds: 0,
@@ -46,7 +46,7 @@ export default class Main extends React.Component {
                 title: data.category.title,
                 answer: data.answer,
                 rounds: this.state.rounds + 1,
-                time: 10
+                time: 30
             })
         } else {
             this.setState({
@@ -81,19 +81,15 @@ export default class Main extends React.Component {
     }
 
     // componentWillUnmount() {
-
     //     this.clearInterval(this.myInterval);
-    //     this.getQuestion()
+       
     // }
-
-
-
-
-
 
     yourAnswer = e => {
         e.preventDefault();
+
         const theAnswer = e.target.elements.theAnswer.value;
+      
         if (theAnswer === "") {
             console.log("you should put the answer!")
             prompt(" You should write your answer!")
@@ -101,13 +97,14 @@ export default class Main extends React.Component {
                 question: this.state.question,
                 title: this.state.title,
                 answer: this.state.answer,
-                rounds: this.state.rounds
+                rounds:this.state.rounds
             })
-
         }
+          
         else if (theAnswer.toLowerCase() !== this.state.answer.toLowerCase()) {
             console.log("wrong")
             this.setState({
+                isHidden:false,
                 wrongAnswer: true,
                 win: false,
                 welcome: false,
@@ -118,33 +115,36 @@ export default class Main extends React.Component {
             const points = this.state.rounds
             console.log(points)
             console.log("correct")
+           
             this.setState({
+                isHidden:false,
                 wrongAnswer: false,
                 win: false,
                 welcome: false,
                 timesUp: false,
                 score: Math.pow(2, points),
-                yourScore: this.state.yourScore += this.state.score
+                yourScore: this.state.yourScore += this.state.score,
             });
+           
+
         }
         //this reset Function should be at the bottom of the props
         //because first the conditions are checked and after the reset function runs
         e.currentTarget.reset()
     }
 
+    
+
+
 
     render() {
-
         if (this.state.win === true) {
             return (
                 <Win
-
                     yourScore={this.state.yourScore}
                 />
             )
         }
-
-
 
         if (this.state.yourAnswer === undefined && this.state.wrongAnswer === false && this.state.timesUp === false) {
             //   
@@ -163,6 +163,9 @@ export default class Main extends React.Component {
                         yourScore={this.state.yourScore}
                         time={this.state.time}
                         onChange={this.onChange}
+                        highestScore={this.state.highestScore}
+                        isHidden={this.state.isHidden}
+                        theAnswe={this.theAnswe}
                     />
                 </div>
             );

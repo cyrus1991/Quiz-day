@@ -7,7 +7,7 @@ const Welcome = (props) => {
     return (
         <div className="container">
             <div className="title">
-                <h1 className="h1-tittle">Welcome to Quiz Game!</h1><br />
+                <h1 className="h1-tittle">Welcome to Quiz-Day!</h1><br />
             </div>
             <h2>Here you will face with 30 difrent questions and for each of them you just have 30 seconds time.
             </h2><br />
