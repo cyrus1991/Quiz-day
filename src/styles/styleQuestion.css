@@ -1,0 +1,28 @@
+body {
+    background-color:#ecf6f1;
+    color:black;
+}
+
+.container {
+    display: grid;
+    justify-content:center;
+    grid-row-gap:20px;
+}
+
+.questions {
+    color:blue;
+}
+
+textarea {
+    height: 100px;
+    width: 600px;
+    background-color:#626363;
+    color:white;
+    font-size: 3em;
+    font-weight:450; 
+}
+
+
+
+
+
