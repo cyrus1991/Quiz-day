@@ -7,7 +7,7 @@ import Win from "./Win";
 
 export default class Main extends React.Component {
     state = {
-        isHidden:undefined,
+        userHighScore:0,
         question: "",
         title: "",
         answer: "",
@@ -39,7 +39,7 @@ export default class Main extends React.Component {
         console.log(data.question)
         console.log(data.category.title)
         console.log(data.answer)
-        if (this.state.rounds < 3) {
+        if (this.state.rounds < 30) {
             this.setState({
                 win: false,
                 question: data.question,
@@ -123,6 +123,7 @@ export default class Main extends React.Component {
                 welcome: false,
                 timesUp: false,
                 score: Math.pow(2, points),
+                userHighScore: Math.pow(2,(points-1)),
                 yourScore: this.state.yourScore += this.state.score,
             });
            
@@ -163,7 +164,7 @@ export default class Main extends React.Component {
                         yourScore={this.state.yourScore}
                         time={this.state.time}
                         onChange={this.onChange}
-                        highestScore={this.state.highestScore}
+                        userHighScore={this.state.userHighScore} 
                         isHidden={this.state.isHidden}
                         theAnswe={this.theAnswe}
                     />
