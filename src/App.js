@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import Question from "./components/Question";
 import GameOver from "./components/GameOver"
 import Welcome from "./components/Welcome"
+import Win from "./components/Win";
 
 
 class App extends Component {
 
   state = {
+    onChange:"",
     question: "",
     title: "",
     answer: "",
@@ -17,13 +19,17 @@ class App extends Component {
     points: NaN,
     time: 0,
     rounds: 0,
-    wrongAnswer: "",
     buttom: "Start the Game",
-    wrong: false,
+    wrong: "",
     whyLose: "",
-    welcome: false,
-    startGame:true,
-    timeIsOver:false
+    welcome: true,
+    timeIsOver:false,
+    start :"",
+    yourAnswer:undefined,
+    timesUp : false,
+    wrongAnswer:false,
+    win:undefined
+    
   }
 
 
@@ -43,6 +49,7 @@ class App extends Component {
     console.log(data.answer)
     if (this.state.rounds < 3) {
       this.setState({
+        win:false,
         question: data.question,
         title: data.category.title,
         answer: data.answer,
@@ -58,7 +65,7 @@ class App extends Component {
         score:undefined,
         time:undefined,
         points:undefined,
-        win: "Congratulation You Won The Game"
+        win:true
       })
     }
   }
@@ -66,50 +73,76 @@ class App extends Component {
 
 
   componentDidMount() {
+    this.mounted=true;
     this.myInterval = setInterval(() => {
       if (this.state.time > 0) {
         this.setState({
-         
+          timesUp : false,
           time: this.state.time - 1
         })
       } else if (this.state.time === 0 ) {
         this.setState({
-          wrong: true,
-          welcome : this.state.welcome,
+          timesUp : true,
+          win:false,
+          welcome: false,
           whyLose: `Your Time is Over.\n The Answer is: ${this.state.answer}`
         })
       }
     }, 1000)
     this.getQuestion();
   }
-  // componentWillUnmount () {
-  //   this.clearInterval(this.myInterval);
-  //   this.getQuestion()
-  //   }
+  componentWillUnmount () {
+
+    this.clearInterval(this.myInterval);
+    this.getQuestion()
+    }
   
   toggleHanddles = (e) => {
     e.preventDefault();
     this.setState({
-      wrong: false,
-     welcome : !this.state.welcome,
-     startGame : !this.state.startGame
+     start : "game is started"
+     
     })
   }
 
-
+welcome  = (e) => {
+  e.preventDefault();
+  this.mounted=false;
+  this.setState({
+    welcome:false
+  })
+}
+onChange = (e) => {
+  e.preventDefault()
+  const nima = e.target.elements.theAnswer.value;
+  
+  this.setState({
+    onChange:nima
+  })
+}
   yourAnswer = e => {
     e.preventDefault();
     
     const theAnswer = e.target.elements.theAnswer.value;
     if (theAnswer === "") {
       console.log("you should put the answer!")
-      alert(" You should write your answer!")
+       prompt(" You should write your answer!")
+      this.setState({
+       question:this.state.question,
+        title: this.state.title,
+        answer: this.state.answer,
+        rounds:this.state.rounds
+      })
+   
     }
     else if (theAnswer.toLowerCase() !== this.state.answer.toLowerCase()) {
       console.log("wrong")
       this.setState({
-        rounds: null,
-        wrong:true,
+        wrongAnswer:true,
+        win:false,
+        welcome: false,
+        answer : !this.state.answer,
+        wrong: "your answer was wrong",
         whyLose: `Your Answer was Wrong.\n The Correct Answer is: ${this.state.answer}`
       })
     } else if (theAnswer.toLowerCase() === this.state.answer.toLowerCase()) {
@@ -117,6 +150,10 @@ class App extends Component {
       console.log(points)
       console.log("correct")
       this.setState({
+        wrongAnswer:false,
+        win:false,
+        welcome: false,
+        timesUp:false,
         score: Math.pow(2, points),
         yourScore: this.state.yourScore += this.state.score
       });
@@ -127,15 +164,26 @@ class App extends Component {
     e.currentTarget.reset()
   }
   render() {
-    if(this.state.win ===  "Congratulation You Won The Game") {
-      return (
+    if ( this.state.welcome === true ) {
+      return(
         <Welcome 
-        toggleHanddles={this.toggleHanddles}/>
+          welcome={this.welcome}
+        />
+      )
+    }
+    if(this.state.win === true && this.state.welcome === false && this.state.yourAnswer=== undefined && this.state.timesUp=== false && this.state.wrongAnswer === false  ) {
+      return (
+        <Win
+        reset={this.reset}
+        yourScore={this.state.yourScore}
+       />
       )
     }
     
-    if ( !this.state.wrong && !this.state.welcome) {
-      return (
+   
+    
+      if(this.state.welcome === false && this.state.yourAnswer=== undefined && this.state.timesUp=== false && this.state.wrongAnswer === false && this.state.win=== false) {
+    return (
         <div>
           <Question
             getQuestion={this.getQuestion}
@@ -148,11 +196,13 @@ class App extends Component {
             score={this.state.score}
             yourScore={this.state.yourScore}
             time={this.state.time}
+            onChange={this.onChange}
           />
         </div>
       );
-    } 
-    if (this.state.wrong) {
+    }
+
+      if ( this.state.wrongAnswer===true  || this.state.timesUp=== true &&  this.state.welcome === false && this.state.win=== false) {
       return (
         <div>
           <GameOver

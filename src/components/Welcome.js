@@ -1,15 +1,18 @@
 import React from "react";
+import "../styles/welcome.css"
 
 const Welcome = (props) => {
     return (
-        <div>
-            <h1>Welcome to Quiz Game!</h1><br/>
+        <div className="container">
+            <div className="title">
+                <h1 className="h1-tittle">Welcome to Quiz Game!</h1><br />
+            </div>
             <h2>Here you will face with 30 difrent questions and for each of them you just have 30 seconds time.
-            </h2><br/>
+            </h2><br />
             <h2>Each Round has duble score in comperaing to the previous round</h2>
-            <h2>If you could answer the all question you will win but, 
-            if you answer the question wrong or later than 30 seconds you will lose the game. 
-             whenever your are ready <button onClick={props.toggleHanddles}><a href="./question" >Here</a></button>
+            <h2>If you could answer the all question you will win but,
+            if you answer the question wrong or later than 30 seconds you will lose the game.
+             whenever your are ready <button onClick={props.welcome}><a href="./question" >Here</a></button>
             </h2>
 
         </div>

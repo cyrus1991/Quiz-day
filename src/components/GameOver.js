@@ -12,7 +12,7 @@ const GameOver = (props) => {
                   </span>
                 )
               })} </h1>
-              <button onClick={props.reset} >  <a href="./question" >Restart the Game </a>  </button>
+              <button onClick={props.reset} ><a href="./question" >Restart the Game </a>  </button>
         </div>
     )
     }

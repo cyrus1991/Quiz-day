@@ -13,9 +13,9 @@ export default class Question extends React.Component {
                 <h2>level: {this.props.rounds}</h2>
                 <h1>Time: {this.props.time}</h1>
                 <h1>{this.props.win}</h1>
-                <form onSubmit={this.props.yourAnswer} >
+                <form onSubmit={this.props.yourAnswer} onChange={this.props.onChange} >
 
-                    <textarea className="textarea" name="theAnswer" ref={this.answerRef}>
+                    <textarea className="textarea" name="theAnswer" ref={this.answerRef} >
                         
                     </textarea>
                     <h2>the score of this level: {this.props.score} </h2> <br />

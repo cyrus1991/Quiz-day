@@ -1,0 +1,12 @@
+body {
+   background-color: #20ded2;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+}
+
+.title{
+    background-color:#fae907;
+}
