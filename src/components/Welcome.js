@@ -1,4 +1,6 @@
 import React from "react";
+import  { Link } from "react-router-dom";   
+
 import "../styles/welcome.css"
 
 const Welcome = (props) => {
@@ -12,7 +14,7 @@ const Welcome = (props) => {
             <h2>Each Round has duble score in comperaing to the previous round</h2>
             <h2>If you could answer the all question you will win but,
             if you answer the question wrong or later than 30 seconds you will lose the game.
-             whenever your are ready <button onClick={props.welcome}><a href="./question" >Here</a></button>
+             whenever your are ready  <Link to ="/main">Start the Game</Link>
             </h2>
 
         </div>

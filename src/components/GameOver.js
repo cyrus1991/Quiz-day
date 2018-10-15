@@ -1,4 +1,5 @@
 import React from "react";
+import  { Link } from "react-router-dom";
 
 const GameOver = (props) => {
     return (
@@ -12,7 +13,7 @@ const GameOver = (props) => {
                   </span>
                 )
               })} </h1>
-              <button onClick={props.reset} ><a href="./question" >Restart the Game </a>  </button>
+              <Link to="/">Restart the Game</Link>
         </div>
     )
     }
