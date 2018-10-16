@@ -11,7 +11,7 @@ const Welcome = (props) => {
                 <h1 className="welcome-h1-header">Welcome to Quiz-Day!</h1>
             </div>
 
-            <h1 className="welcome-rules">Rules</h1>
+            <h1 className="welcome-rules">Rules:</h1>
             <div className="welcome-rules-container">
                 <ul>
                     <li> <h3>  There are 30 questions that you should answer </h3></li>

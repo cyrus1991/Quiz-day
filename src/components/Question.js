@@ -4,7 +4,7 @@ import "../styles/style.css"
 
 export default class Question extends React.Component {
     state = {
-        isVidible: false
+        isVidible: false,
     }
     render() {
         return (
@@ -31,17 +31,17 @@ export default class Question extends React.Component {
                     <div className="textarea-container">
                         <textarea className="textarea" name="theAnswer"
                              onChange={(e) => this.setState({
-                            isVidible: e.target.value !== ""
+                               isVidible: e.target.value !== ""
                              })} 
                         >
                         </textarea>
                     </div>
-
+                    
                     {this.state.isVidible ? <div className="button-container"> <button
                         className="submit-btn"
                         onClick={this.props.getQuestion} >
                         Submit the answer
-                                </button> </div> : null}
+                         </button> </div> : null}
                 </form>
             </div>
         )

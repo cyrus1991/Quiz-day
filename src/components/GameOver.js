@@ -11,11 +11,11 @@ const GameOver = (props) => {
             </div>
 
             <div className="gameover-cause-container">
-                <h1 className="gameover-cause">{props.whyLose} </h1>
+                <h1 className="gameover-cause"> {props.whyLose} </h1>
             </div>
 
             <div className="gameover-correct-container">
-                <h1 className="gameover-correct"> The Correct answer was:<span className="gameover-answer">
+                <h1 className="gameover-correct"> The Correct answer was: <span className="gameover-answer">
                     {props.correctAnswer}</span>
                 </h1>
             </div>

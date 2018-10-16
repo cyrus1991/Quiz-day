@@ -97,7 +97,6 @@ export default class Main extends React.Component {
         else if (theAnswer.toLowerCase() !== this.state.answer.toLowerCase()) {
             console.log("wrong")
             this.setState({
-                isHidden: false,
                 wrongAnswer: true,
                 win: false,
                 welcome: false,
@@ -109,7 +108,6 @@ export default class Main extends React.Component {
             console.log("correct")
 
             this.setState({
-                isHidden: false,
                 wrongAnswer: false,
                 win: false,
                 welcome: false,
