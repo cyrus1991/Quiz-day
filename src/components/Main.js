@@ -34,7 +34,7 @@ export default class Main extends React.Component {
         // just try to bring the object out of the array.
         const data = array_data[0];
 
-        console.log("the answer is " + data.answer)
+        console.log(data.answer)
         if (this.state.rounds < 30) {
             this.setState({
                 win: false,
