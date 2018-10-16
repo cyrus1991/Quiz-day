@@ -1,20 +1,26 @@
 import React from "react";
-import  { Link } from "react-router-dom";   
+import { Link } from "react-router-dom";
 
 import "../styles/welcome.css"
 
 const Welcome = (props) => {
     return (
-        <div className="container">
-            <div className="title">
-                <h1 className="h1-tittle">Welcome to Quiz-Day!</h1><br />
+        <div className="welcome-container">
+            <div className="welcome-header">
+                <h1 className="welcome-h1-header">Welcome to Quiz-Day!</h1>
             </div>
-            <h2>Here you will face with 30 difrent questions and for each of them you just have 30 seconds time.
-            </h2><br />
-            <h2>Each Round has duble score in comperaing to the previous round</h2>
-            <h2>If you could answer the all question you will win but,
-            if you answer the question wrong or later than 30 seconds you will lose the game.
-             whenever your are ready  <Link to ="/main">Start the Game</Link>
+            <h1 className="welcome-rules">Rules</h1>
+            <div className="welcome-rules-container">
+                <ul>
+                    <li> <h3>  There are 30 questions that you should answer </h3></li>
+                    <li> <h3>   For each question, you just have 30 second </h3></li>
+                    <li><h3>   The point of each round  doubles next to the previous round </h3></li>
+                    <li><h3>  If answer a question wrong  you will lose the Game </h3></li>
+                    <li>  <h3> If your time gets over you will lose the Game as well </h3></li>
+                </ul>
+                </div>
+            <h2>
+                whenever your are ready  <Link className="welcome-link" to="/main">Click Here</Link>
             </h2>
 
         </div>

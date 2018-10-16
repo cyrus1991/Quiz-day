@@ -7,6 +7,7 @@ import Win from "./Win";
 
 export default class Main extends React.Component {
     state = {
+        correctAnswer:"",
         userHighScore:0,
         question: "",
         title: "",
@@ -17,7 +18,6 @@ export default class Main extends React.Component {
         time: 0,
         rounds: 0,
         buttom: "Start the Game",
-        wrong: "",
         whyLose: "",
         welcome: true,
         timeIsOver: false,
@@ -73,17 +73,18 @@ export default class Main extends React.Component {
                     timesUp: true,
                     win: false,
                     welcome: false,
-                    whyLose: `Your Time is Over.\n The Answer is: ${this.state.answer}`
+                    whyLose: "Your Time is Over!" ,
+                    correctAnswer: this.state.answer
                 })
             }
         }, 1000)
         this.getQuestion();
     }
 
-    // componentWillUnmount() {
-    //     this.clearInterval(this.myInterval);
-       
-    // }
+    componentWillUnmount() {
+        clearInterval(this.myInterval);
+        
+    }
 
     yourAnswer = e => {
         e.preventDefault();
@@ -92,7 +93,6 @@ export default class Main extends React.Component {
       
         if (theAnswer === "") {
             console.log("you should put the answer!")
-            prompt(" You should write your answer!")
             this.setState({
                 question: this.state.question,
                 title: this.state.title,
@@ -108,8 +108,8 @@ export default class Main extends React.Component {
                 wrongAnswer: true,
                 win: false,
                 welcome: false,
-                wrong: "your answer was wrong",
-                whyLose: `Your Answer was Wrong.\n The Correct Answer is: ${this.state.answer}`
+                whyLose: 'Your Answer was Wrong',
+                correctAnswer: this.state.answer
             })
         } else if (theAnswer.toLowerCase() === this.state.answer.toLowerCase()) {
             const points = this.state.rounds
@@ -148,8 +148,6 @@ export default class Main extends React.Component {
         }
 
         if (this.state.yourAnswer === undefined && this.state.wrongAnswer === false && this.state.timesUp === false) {
-            //   
-            // && this.state.win=== false) {
             return (
                 <div>
                     <Question
@@ -167,6 +165,7 @@ export default class Main extends React.Component {
                         userHighScore={this.state.userHighScore} 
                         isHidden={this.state.isHidden}
                         theAnswe={this.theAnswe}
+                     
                     />
                 </div>
             );
@@ -177,6 +176,7 @@ export default class Main extends React.Component {
                 <div>
                     <GameOver
                         whyLose={this.state.whyLose}
+                        correctAnswer= {this.state.correctAnswer}
                     /> 
                 </div>
             )
