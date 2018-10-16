@@ -7,8 +7,8 @@ import Win from "./Win";
 
 export default class Main extends React.Component {
     state = {
-        correctAnswer:"",
-        userHighScore:0,
+        correctAnswer: "",
+        userHighScore: 0,
         question: "",
         title: "",
         answer: "",
@@ -17,11 +17,9 @@ export default class Main extends React.Component {
         points: NaN,
         time: 0,
         rounds: 0,
-        buttom: "Start the Game",
         whyLose: "",
         welcome: true,
         timeIsOver: false,
-        start: "",
         yourAnswer: undefined,
         timesUp: false,
         wrongAnswer: false,
@@ -36,9 +34,7 @@ export default class Main extends React.Component {
         // just try to bring the object out of the array.
         const data = array_data[0];
 
-        console.log(data.question)
-        console.log(data.category.title)
-        console.log(data.answer)
+        console.log("the answer is " + data.answer)
         if (this.state.rounds < 30) {
             this.setState({
                 win: false,
@@ -73,7 +69,7 @@ export default class Main extends React.Component {
                     timesUp: true,
                     win: false,
                     welcome: false,
-                    whyLose: "Your Time is Over!" ,
+                    whyLose: "Your Time is Over!",
                     correctAnswer: this.state.answer
                 })
             }
@@ -83,28 +79,25 @@ export default class Main extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.myInterval);
-        
+
     }
 
     yourAnswer = e => {
         e.preventDefault();
-
         const theAnswer = e.target.elements.theAnswer.value;
-      
         if (theAnswer === "") {
             console.log("you should put the answer!")
             this.setState({
                 question: this.state.question,
                 title: this.state.title,
                 answer: this.state.answer,
-                rounds:this.state.rounds
+                rounds: this.state.rounds
             })
         }
-          
         else if (theAnswer.toLowerCase() !== this.state.answer.toLowerCase()) {
             console.log("wrong")
             this.setState({
-                isHidden:false,
+                isHidden: false,
                 wrongAnswer: true,
                 win: false,
                 welcome: false,
@@ -113,30 +106,25 @@ export default class Main extends React.Component {
             })
         } else if (theAnswer.toLowerCase() === this.state.answer.toLowerCase()) {
             const points = this.state.rounds
-            console.log(points)
             console.log("correct")
-           
+
             this.setState({
-                isHidden:false,
+                isHidden: false,
                 wrongAnswer: false,
                 win: false,
                 welcome: false,
                 timesUp: false,
                 score: Math.pow(2, points),
-                userHighScore: Math.pow(2,(points-1)),
+                userHighScore: Math.pow(2, (points - 1)),
                 yourScore: this.state.yourScore += this.state.score,
             });
-           
+
 
         }
         //this reset Function should be at the bottom of the props
         //because first the conditions are checked and after the reset function runs
         e.currentTarget.reset()
     }
-
-    
-
-
 
     render() {
         if (this.state.win === true) {
@@ -162,22 +150,18 @@ export default class Main extends React.Component {
                         yourScore={this.state.yourScore}
                         time={this.state.time}
                         onChange={this.onChange}
-                        userHighScore={this.state.userHighScore} 
-                        isHidden={this.state.isHidden}
-                        theAnswe={this.theAnswe}
-                     
+                        userHighScore={this.state.userHighScore}
                     />
                 </div>
             );
         }
-
         if (this.state.timesUp === true || this.state.wrongAnswer === true) {
             return (
                 <div>
                     <GameOver
                         whyLose={this.state.whyLose}
-                        correctAnswer= {this.state.correctAnswer}
-                    /> 
+                        correctAnswer={this.state.correctAnswer}
+                    />
                 </div>
             )
         }
