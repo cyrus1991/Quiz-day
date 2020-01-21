@@ -5,8 +5,6 @@ import Main from "./components/Main"
 import Welcome from "./components/Welcome"
 import Error from "./components/Error";
 
-
-
 class App extends Component {
   render() {
     return (
